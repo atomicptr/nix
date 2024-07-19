@@ -1,10 +1,9 @@
 {
   pkgs ? import <nixpkgs> { },
-  config ? {},
 }:
 
 let
-  callPackage = pkgs.lib.callPackageWith (pkgs // { inherit config; });
+  callPackage = pkgs.lib.callPackageWith (pkgs);
   packageDirs = builtins.attrNames (builtins.readDir ./pkgs);
 in
 builtins.listToAttrs (
