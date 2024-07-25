@@ -9,18 +9,18 @@ system ? builtins.currentSystem
 }:
 let
   shaMap = {
-    x86_64-linux = "0rjvp9v9avbx3d0p1xrpnhk1f5f0656xzm5wfrz5ihcclcjwvbiq";
-    x86_64-darwin = "1x2a9y9ya7xmi4djc0srv4j535s9rnshn52hhwarka50lcijnibk";
+    x86_64-linux = "167wx15xqjisq0q5p4fa69jxcmqrqlndd6992rndwwxzb26k1a6s";
+    x86_64-darwin = "04acb9rbwhzipgx0q7pncybn1wx5liy83n1m0slg6cxg6zcwm0dy";
   };
 
   urlMap = {
-    x86_64-linux = "https://github.com/atomicptr/tmplr/releases/download/v0.3.0/tmplr_0.3.0_linux_amd64.tar.gz";
-    x86_64-darwin = "https://github.com/atomicptr/tmplr/releases/download/v0.3.0/tmplr_0.3.0_darwin_amd64.tar.gz";
+    x86_64-linux = "https://github.com/atomicptr/tmplr/releases/download/v0.3.1/tmplr_0.3.1_linux_amd64.tar.gz";
+    x86_64-darwin = "https://github.com/atomicptr/tmplr/releases/download/v0.3.1/tmplr_0.3.1_darwin_amd64.tar.gz";
   };
 in
 stdenvNoCC.mkDerivation {
   pname = "tmplr";
-  version = "0.3.0";
+  version = "0.3.1";
   src = fetchurl {
     url = urlMap.${system};
     sha256 = shaMap.${system};
