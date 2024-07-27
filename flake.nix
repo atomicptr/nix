@@ -38,5 +38,11 @@
         in
         importPackages pkgs
       );
+
+      overlay = final: prev: {
+        atomicptr = importPackages prev;
+      };
+
+      overlays.default = self.overlay;
     };
 }
