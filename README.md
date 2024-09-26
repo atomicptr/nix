@@ -4,11 +4,36 @@ A place to host my own nix packages
 
 ## Usage
 
-Just fetch and import the tarball:
+### Flake
+
+Just add this repo as an input
+
+```nix
+{
+  # ...
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    atomicptr.url = "github:atomicptr/nix";
+    # ...
+  };
+
+  # ...
+}
+````
+
+### Regular
+
+Just fetch and import the repository:
 
 ```nix
 let
-  atomicptr = import (fetchTarball "https://github.com/atomicptr/nix/archive/refs/heads/master.zip") {};
+  atomicptr = import (fetchGit { url = "http://github.com/atomicptr/nix.git"; }) {
+    pkgs = import <nixpkgs> {
+      config = {
+        allowUnfree = true;
+      };
+    };
+  };
 in
 {
   environment.systemPackages = with pkgs; [
