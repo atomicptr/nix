@@ -1,10 +1,10 @@
 { lib, fetchurl, stdenvNoCC }:
 let
   # this has to be updated manually
-  date = "2024-09-26";
+  date = "2024-09-27";
   # use this to regenerate:
   #    curl -sSf -o /tmp/dune "https://download.dune.ci.dev/$(date +%Y-%m-%d)/x86_64-unknown-linux-musl/dune" && sha256sum /tmp/dune && rm /tmp/dune
-  hash = "c0b235edf38392eb1d9ac13ee0ba8e993b3602eb6218dcb7f38bfa66a52fd63f";
+  hash = "2199ed5a14afed3d63816ef51666b12fc6edc4a783f9dcbe709bb4a08fb59f54";
   arch = "x86_64-unknown-linux-musl";
 in
 stdenvNoCC.mkDerivation {
