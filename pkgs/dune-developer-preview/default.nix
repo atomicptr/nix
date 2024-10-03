@@ -1,17 +1,17 @@
 { lib, fetchurl, stdenvNoCC }:
 let
   # this has to be updated manually
-  date = "2024-09-27";
+  date = "2024-10-03";
   # use this to regenerate:
-  #    curl -sSf -o /tmp/dune "https://download.dune.ci.dev/$(date +%Y-%m-%d)/x86_64-unknown-linux-musl/dune" && sha256sum /tmp/dune && rm /tmp/dune
-  hash = "2199ed5a14afed3d63816ef51666b12fc6edc4a783f9dcbe709bb4a08fb59f54";
+  #    curl -sSf -o /tmp/dune "https://get.dune.build/$(date +%Y-%m-%d)/x86_64-unknown-linux-musl/dune" && sha256sum /tmp/dune && rm /tmp/dune
+  hash = "c0405a1041f69e1a54be419b364735b34085daf771709308925adb3fba35d89a";
   arch = "x86_64-unknown-linux-musl";
 in
 stdenvNoCC.mkDerivation {
   pname = "dune-developer-preview";
   version = builtins.replaceStrings ["-"] ["."] date;
   src = fetchurl {
-    url = "https://download.dune.ci.dev/${date}/${arch}/dune";
+    url = "https://get.dune.build/${date}/${arch}/dune";
     sha256 = hash;
   };
 
@@ -25,7 +25,7 @@ stdenvNoCC.mkDerivation {
 
   meta = {
     description = "Dune Developer Preview";
-    homepage = "https://dune.ci.dev/";
+    homepage = "https://preview.dune.build";
     license = lib.licenses.mit;
 
     sourceProvenance = [ lib.sourceTypes.binaryNativeCode ];
