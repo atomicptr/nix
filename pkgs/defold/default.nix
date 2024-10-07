@@ -31,24 +31,21 @@ stdenv.mkDerivation rec {
     cp -r * $out/share/defold
 
     # install icon
-    mkdir -p $out/share/icons/hicolor/scalable/apps
-    install -Dm644 $out/share/defold/logo_blue.png $out/share/icons/hicolor/scalable/apps/Defold.png
+    install -Dm644 $out/share/defold/logo_blue.png $out/share/icons/hicolor/512x512/apps/Defold.png
 
     makeWrapper ${pkgs.steam-run}/bin/steam-run $out/bin/Defold \
       --append-flags $out/share/defold/Defold
   '';
 
-  desktopItems = [
-    (makeDesktopItem {
-      name = "Defold";
-      exec = "Defold %u";
-      icon = "Defold";
-      desktopName = "Defold";
-      comment = "The game engine for high-performance cross-platform games";
-      categories = [ "Development" ];
-      startupWMClass = "Defold";
-    })
-  ];
+  desktopItem = makeDesktopItem {
+    name = "Defold";
+    exec = "Defold %u";
+    icon = "Defold";
+    desktopName = "Defold";
+    comment = "The game engine for high-performance cross-platform games";
+    categories = [ "Development" ];
+    startupWMClass = "com.defold.editor.Start";
+  };
 
   meta = {
     description = "The game engine for high-performance cross-platform games";
