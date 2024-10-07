@@ -17,6 +17,16 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-kLbdafbIAtby89XQGsGZKGp9xeRLzuaeLcju7ro+kK0=";
   };
 
+  desktopItem = makeDesktopItem {
+    name = "Defold";
+    exec = "Defold %u";
+    icon = "Defold";
+    desktopName = "Defold";
+    comment = "The game engine for high-performance cross-platform games";
+    categories = [ "Development" ];
+    startupWMClass = "com.defold.editor.Start";
+  };
+
   dontConfigure = true;
   dontBuild = true;
 
@@ -27,6 +37,10 @@ stdenv.mkDerivation rec {
 
     mkdir -p $out/bin
     mkdir -p $out/share/defold
+    mkdir -p $out/share/applications
+
+    # move desktop file into applications
+    cp ${desktopItem}/share/applications/* $out/share/applications/
 
     cp -r * $out/share/defold
 
@@ -36,16 +50,6 @@ stdenv.mkDerivation rec {
     makeWrapper ${pkgs.steam-run}/bin/steam-run $out/bin/Defold \
       --append-flags $out/share/defold/Defold
   '';
-
-  desktopItem = makeDesktopItem {
-    name = "Defold";
-    exec = "Defold %u";
-    icon = "Defold";
-    desktopName = "Defold";
-    comment = "The game engine for high-performance cross-platform games";
-    categories = [ "Development" ];
-    startupWMClass = "com.defold.editor.Start";
-  };
 
   meta = {
     description = "The game engine for high-performance cross-platform games";
