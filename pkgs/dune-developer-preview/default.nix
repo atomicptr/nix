@@ -5,10 +5,10 @@
 }:
 let
   # this has to be updated manually
-  date = "2024-10-07";
+  date = "2024-10-08";
   # use this to regenerate:
   #    curl -sSf -o /tmp/dune "https://get.dune.build/$(date +%Y-%m-%d)/x86_64-unknown-linux-musl/dune" && sha256sum /tmp/dune && rm /tmp/dune
-  hash = "b633e910a68bd832103ebd69419755caecab206e864c8435498352d43583af50";
+  hash = "9e38b47a15cc9cfe8301131220b3190be60bb7cfaaa42ba7f80cd75b7041bb8a";
   arch = "x86_64-unknown-linux-musl";
 in
 stdenvNoCC.mkDerivation {
