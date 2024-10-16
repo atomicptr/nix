@@ -4,17 +4,17 @@
   makeDesktopItem,
   makeWrapper,
   pkgs,
-  stdenv,
+  stdenvNoCC,
   ...
 }:
 
-stdenv.mkDerivation rec {
+stdenvNoCC.mkDerivation rec {
   pname = "defold";
   version = "1.9.3";
 
   src = fetchurl {
     url = "https://github.com/defold/defold/releases/download/${version}/Defold-x86_64-linux.tar.gz";
-    sha256 = "58c69ebd2b74b8394a2efed7c95d6a1cc1b94a70c61ecdcf7b70ac854476dfe5";
+    sha256 = "352de00b899fdcee7f91977a954ab1f07d04839d7146eff53bda6e6170661694";
   };
 
   desktopItem = makeDesktopItem {
