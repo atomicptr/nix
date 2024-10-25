@@ -10,11 +10,11 @@
 
 stdenvNoCC.mkDerivation rec {
   pname = "defold";
-  version = "1.9.3";
+  version = "1.9.4";
 
   src = fetchurl {
     url = "https://github.com/defold/defold/releases/download/${version}/Defold-x86_64-linux.tar.gz";
-    sha256 = "352de00b899fdcee7f91977a954ab1f07d04839d7146eff53bda6e6170661694";
+    sha256 = "472a768c9dfe1d1811d2243d3174f840ee7eb7563a9743a14a977e565bb70616";
   };
 
   desktopItem = makeDesktopItem {
