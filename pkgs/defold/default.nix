@@ -14,7 +14,7 @@ stdenvNoCC.mkDerivation rec {
 
   src = fetchurl {
     url = "https://github.com/defold/defold/releases/download/${version}/Defold-x86_64-linux.tar.gz";
-    sha256 = "bb86714cbf98859c683d34d6c98f292152f93f339b607fb63a3bcf5553946b09";
+    sha256 = "49b48475a7f88ec1d632bcc5a193acdfb2cf55169f95c7b73bb3bdcba050d1b7";
   };
 
   desktopItem = makeDesktopItem {
