@@ -1,21 +1,21 @@
 {
   lib,
-  fetchurl,
+  fetchzip,
   stdenvNoCC,
 }:
 let
   # this has to be updated manually
-  date = "2024-11-19";
+  date = "2024-12-05";
   # use this to regenerate:
   #    export DUNE_VERSION="2024-11-03" && curl -sSf -o /tmp/dune "https://get.dune.build/$DUNE_VERSION/x86_64-unknown-linux-musl/dune" && sha256sum /tmp/dune && rm /tmp/dune
-  hash = "1617a9fc0f62bedcc5d51a8c3d6efe617fc8caa63bcff32c77561b98a567e044";
+  hash = "sha256-wIJ4AUIEoGWXorvPqpLpKQyDLaF5/igsLTInoM+lC7E=";
   arch = "x86_64-unknown-linux-musl";
 in
 stdenvNoCC.mkDerivation {
   pname = "dune-developer-preview";
   version = builtins.replaceStrings [ "-" ] [ "." ] date;
-  src = fetchurl {
-    url = "https://get.dune.build/${date}/${arch}/dune";
+  src = fetchzip {
+    url = "https://get.dune.build/${date}/${arch}/dune-${date}-${arch}.tar.gz";
     sha256 = hash;
   };
 
@@ -23,7 +23,7 @@ stdenvNoCC.mkDerivation {
 
   installPhase = ''
     mkdir -p $out/bin
-    cp -vr $src $out/bin/dune
+    cp -vr $src/dune $out/bin/dune
     chmod +x $out/bin/dune
   '';
 
