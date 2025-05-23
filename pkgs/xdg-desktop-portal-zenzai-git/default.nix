@@ -11,13 +11,13 @@
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "xdg-desktop-portal-zenzai-git";
-  version = "0.3.0";
+  version = "0.4.0";
 
   src = fetchFromGitHub {
     owner = "atomicptr";
     repo = "xdg-desktop-portal-zenzai";
     rev = "master";
-    hash = "sha256-8SPHk5n9zn2Qxus/zFYxclXKcZvr6+LQTx5kAmIdvSU=";
+    hash = "sha256-7dXGOL+WXLskdFO+xUdrUQdvq+p7eXFygOy2n2QdV4w=";
   };
 
   cargoDeps = rustPlatform.fetchCargoVendor {
