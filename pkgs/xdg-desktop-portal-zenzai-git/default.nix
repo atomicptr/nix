@@ -17,12 +17,12 @@ stdenv.mkDerivation (finalAttrs: {
     owner = "atomicptr";
     repo = "xdg-desktop-portal-zenzai";
     rev = "master";
-    hash = "sha256-GS/lWUd+PX3aEdqZZ9ye6ZPMpa6rwJApBPIf0ipOspw=";
+    hash = "sha256-8SPHk5n9zn2Qxus/zFYxclXKcZvr6+LQTx5kAmIdvSU=";
   };
 
   cargoDeps = rustPlatform.fetchCargoVendor {
     inherit (finalAttrs) pname version src;
-    hash = "sha256-dhp67QC2UoUascetZFX32LVXq8IZDwq1iVqhj8mhWdA=";
+    hash = "sha256-TiEnlceSx/tXZ97axeRhEv6YhaA9X/qP/vloP5vx4gM=";
   };
 
   nativeBuildInputs = [
