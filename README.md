@@ -37,7 +37,7 @@ let
 in
 {
   environment.systemPackages = with pkgs; [
-    atomicptr.playdate-sdk
+    atomicptr.PACKAGE_NAME
   ];
 }
 ```
