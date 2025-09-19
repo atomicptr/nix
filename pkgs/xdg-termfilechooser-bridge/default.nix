@@ -8,18 +8,18 @@
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "xdg-termfilechooser-bridge";
-  version = "0.2.5";
+  version = "0.2.6";
 
   src = fetchFromGitHub {
     owner = "atomicptr";
     repo = "xdg-termfilechooser-bridge";
     rev = "v${finalAttrs.version}";
-    hash = "sha256-sR0ZRpUCXan/PXdfVwhestJuKPy3Jcz0rXwOCl8gUMc=";
+    hash = "sha256-WpZWalnCjNLVW6rpNk/MY9lKiR8fSMeU0Vj1LzHr2wc=";
   };
 
   cargoDeps = rustPlatform.fetchCargoVendor {
     inherit (finalAttrs) pname version src;
-    hash = "sha256-qdJiW91ya/FDu49MrRg7FJIGI4LDOnbdjF8MGVbRHI8=";
+    hash = "sha256-vsTDcnaXXNcD9ah5MgTmFxew59gKgbPWIVu8lrBy92U=";
   };
 
   nativeBuildInputs = [
