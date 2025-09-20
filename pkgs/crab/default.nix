@@ -9,18 +9,18 @@ system ? builtins.currentSystem
 }:
 let
   shaMap = {
-    x86_64-linux = "0rcwcn95xgzlmidayx4y4vzfljginjk0sa78cbdyd7sv8bg8zsil";
-    x86_64-darwin = "0a3fbaq4prckcikdljq9q59y7pyd5cwf22xvb6r2b31pychlzgsx";
+    x86_64-linux = "18c2mxaf0f01c1905c7ppnq9cq07qr4nn5al9zn9idhzk9b8mf9q";
+    x86_64-darwin = "10w9xv7z8fw4628pwnw9dj2n3wf3g0lgfcpy3k2f3v6fhv30abwm";
   };
 
   urlMap = {
-    x86_64-linux = "https://github.com/atomicptr/crab/releases/download/v1.4.3/crab_1.4.3_linux_amd64.tar.gz";
-    x86_64-darwin = "https://github.com/atomicptr/crab/releases/download/v1.4.3/crab_1.4.3_darwin_amd64.tar.gz";
+    x86_64-linux = "https://github.com/atomicptr/crab/releases/download/v1.4.4/crab_1.4.4_linux_amd64.tar.gz";
+    x86_64-darwin = "https://github.com/atomicptr/crab/releases/download/v1.4.4/crab_1.4.4_darwin_amd64.tar.gz";
   };
 in
 stdenvNoCC.mkDerivation {
   pname = "crab";
-  version = "1.4.3";
+  version = "1.4.4";
   src = fetchurl {
     url = urlMap.${system};
     sha256 = shaMap.${system};
