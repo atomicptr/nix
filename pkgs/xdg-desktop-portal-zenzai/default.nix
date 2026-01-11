@@ -11,18 +11,18 @@
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "xdg-desktop-portal-zenzai";
-  version = "0.3.2";
+  version = "0.3.3";
 
   src = fetchFromGitHub {
     owner = "atomicptr";
     repo = "xdg-desktop-portal-zenzai";
     rev = "v${finalAttrs.version}";
-    hash = "sha256-yPBszAcUQRNoYV38BYjOV4/vm6pwzBN8bXUctuIs1yM=";
+    hash = "sha256-1OHkFRQR08RpvnJtGFhLqQdWkSZ5QoGYrhUcKPmIgVw=";
   };
 
   cargoDeps = rustPlatform.fetchCargoVendor {
     inherit (finalAttrs) pname version src;
-    hash = "sha256-VGSWtXwCGCrJM+8t4FlJRpPx/mbHl55Y0yCgnT0svlg=";
+    hash = "sha256-DENqKu0dGQ3Yct/8mAKm2KCg+bKyCMEQD45VXqlPXdo=";
   };
 
   nativeBuildInputs = [
