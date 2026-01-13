@@ -17,7 +17,7 @@
   gnused,
   gobject-introspection,
   gtk3,
-  jdk21,
+  openjdk25,
   libGL,
   libGLU,
   xorg,
@@ -28,14 +28,14 @@
 }:
 let
   pname = "defold";
-  version = "1.11.2";
+  version = "1.12.0";
 
   defold = stdenv.mkDerivation {
     inherit pname version;
 
     src = fetchurl {
       url = "https://github.com/defold/defold/releases/download/${version}/Defold-x86_64-linux.tar.gz";
-      hash = "sha256-GoGf/yAAizMGUGbsUtUoC+HquHy1f585GzLcEI/iC2I=";
+      hash = "sha256-c56Pr5r5TuHtrComPpH+HIw+MFy/ZWwWdbxKoiovcPU=";
     };
 
     dontBuild = true;
@@ -46,7 +46,7 @@ let
       addDriverRunpath
       copyDesktopItems
       gnused
-      (jdk21.override { enableJavaFX = true; })
+      openjdk25
       makeWrapper
     ];
 
@@ -66,8 +66,8 @@ let
     postFixup = ''
       # Devendor bundled JDK; it segfaults on NixOS
       JDK_VER=$(sed -n 's/.*\/\(jdk-[^/]*\).*/\1/p' $out/share/defold/config)
-      ln -s ${jdk21} $out/share/defold/packages/${jdk21.name}
-      sed -i "s|packages/$JDK_VER|packages/${jdk21.name}|" $out/share/defold/config
+      ln -s ${openjdk25} $out/share/defold/packages/${openjdk25.name}
+      sed -i "s|packages/$JDK_VER|packages/${openjdk25.name}|" $out/share/defold/config
       # Disable editor updates; Nix will handle updates
       sed -i 's/\(channel = \).*/\1/' $out/share/defold/config
       # Scale the UI
@@ -77,7 +77,7 @@ let
     '';
 
     desktopItems = [
-      (makeDesktopItem rec {
+      (makeDesktopItem {
         name = "defold-editor";
         desktopName = "Defold";
         comment = "An out of the box, turn-key solution for multi-platform game development";
