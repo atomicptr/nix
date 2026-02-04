@@ -28,14 +28,14 @@
 }:
 let
   pname = "defold";
-  version = "1.12.0";
+  version = "1.12.1";
 
   defold = stdenv.mkDerivation {
     inherit pname version;
 
     src = fetchurl {
       url = "https://github.com/defold/defold/releases/download/${version}/Defold-x86_64-linux.tar.gz";
-      hash = "sha256-c56Pr5r5TuHtrComPpH+HIw+MFy/ZWwWdbxKoiovcPU=";
+      hash = "sha256-5Hos/PhSNbSqBplVIh89TgjJxg5+egXyw/DqxMjFxkY=";
     };
 
     dontBuild = true;
