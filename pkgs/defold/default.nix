@@ -20,7 +20,14 @@
   openjdk25,
   libGL,
   libGLU,
-  xorg,
+  libx11,
+  libxcursor,
+  libxext,
+  libxi,
+  libxrandr,
+  libxrender,
+  libxtst,
+  libxxf86vm,
   openal,
   pango,
   zlib,
@@ -113,14 +120,14 @@ buildFHSEnv {
     gtk3
     libGL
     libGLU
-    xorg.libX11
-    xorg.libXcursor
-    xorg.libXext
-    xorg.libXi
-    xorg.libXrandr
-    xorg.libXrender
-    xorg.libXtst
-    xorg.libXxf86vm
+    libx11
+    libxcursor
+    libxext
+    libxi
+    libxrandr
+    libxrender
+    libxtst
+    libxxf86vm
     openal
     pango
     zlib
