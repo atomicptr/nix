@@ -1,14 +1,9 @@
 {
   addDriverRunpath,
   buildFHSEnv,
+  cairo,
   copyDesktopItems,
   fetchurl,
-  lib,
-  makeDesktopItem,
-  makeWrapper,
-  stdenv,
-  writeScript,
-  cairo,
   fontconfig,
   freetype,
   gdk-pixbuf,
@@ -17,9 +12,10 @@
   gnused,
   gobject-introspection,
   gtk3,
-  openjdk25,
+  lib,
   libGL,
   libGLU,
+  libgbm,
   libx11,
   libxcursor,
   libxext,
@@ -28,21 +24,26 @@
   libxrender,
   libxtst,
   libxxf86vm,
+  makeDesktopItem,
+  makeWrapper,
   openal,
+  openjdk25,
   pango,
+  stdenv,
+  writeScript,
   zlib,
   uiScale ? "1.0",
 }:
 let
   pname = "defold";
-  version = "1.12.4";
+  version = "1.13.0";
 
   defold = stdenv.mkDerivation {
     inherit pname version;
 
     src = fetchurl {
       url = "https://github.com/defold/defold/releases/download/${version}/Defold-x86_64-linux.tar.gz";
-      hash = "sha256-VRCCuwcTODYx9CzH/tna5OfKlnslswEsiHHQIM5FEYg=";
+      hash = "sha256-lTVTjx9x5ZiPmiESMLARlldsrRknpjNbm8B3Vf5SrjA=";
     };
 
     dontBuild = true;
@@ -75,12 +76,16 @@ let
       JDK_VER=$(sed -n 's/.*\/\(jdk-[^/]*\).*/\1/p' $out/share/defold/config)
       ln -s ${openjdk25} $out/share/defold/packages/${openjdk25.name}
       sed -i "s|packages/$JDK_VER|packages/${openjdk25.name}|" $out/share/defold/config
+
       # Disable editor updates; Nix will handle updates
       sed -i 's/\(channel = \).*/\1/' $out/share/defold/config
+
       # Scale the UI
       sed -i "s|^linux =|linux = -Dglass.gtk.uiScale=${uiScale}|" $out/share/defold/config
       addDriverRunpath $out/share/defold/Defold
-      makeWrapper "$out/share/defold/Defold" "$out/bin/Defold"
+
+      makeWrapper "$out/share/defold/Defold" "$out/bin/Defold" \
+        --prefix LD_LIBRARY_PATH : ${openjdk25}/lib/openjdk/lib
     '';
 
     desktopItems = [
@@ -118,6 +123,7 @@ buildFHSEnv {
     glib
     gobject-introspection
     gtk3
+    libgbm
     libGL
     libGLU
     libx11
