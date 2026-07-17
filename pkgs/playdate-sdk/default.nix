@@ -1,5 +1,6 @@
 {
   autoPatchelfHook,
+  copyDesktopItems,
   curl,
   fetchurl,
   gsettings-desktop-schemas,
@@ -27,6 +28,7 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = [
     autoPatchelfHook
+    copyDesktopItems
     makeWrapper
   ];
 
@@ -78,9 +80,6 @@ stdenv.mkDerivation rec {
 
     #### icons
     install -Dm644 $out/share/playdate-sdk/Resources/date.play.simulator.svg $out/share/icons/hicolor/scalable/apps/PlaydateSimulator.svg
-
-    mkdir -p $out/share/applications
-    cp "''${desktopItems[0]}/share/applications/PlaydateSimulator.desktop" $out/share/applications/
 
     runHook postInstall
   '';
