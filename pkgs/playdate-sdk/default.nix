@@ -77,7 +77,7 @@ stdenv.mkDerivation rec {
 
     mkdir -p $out/share/applications
     for item in "''${desktopItems[@]}"; do
-      ln -s "$item"/share/applications/* $out/share/applications/
+      cp "$item"/share/applications/* $out/share/applications/
     done
 
     runHook postInstall
