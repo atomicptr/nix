@@ -13,5 +13,6 @@ fi
 
 export PLAYDATE_SDK_PATH="$USER_SDK_DIR"
 export LD_LIBRARY_PATH="@ldLibraryPath@"
+export XDG_DATA_DIRS="@gsettingsSchemas@:${XDG_DATA_DIRS:-}"
 
 exec "$USER_SDK_DIR/bin/PlaydateSimulator" "$@"

@@ -2,6 +2,8 @@
   autoPatchelfHook,
   curl,
   fetchurl,
+  gsettings-desktop-schemas,
+  gtk3,
   lib,
   makeDesktopItem,
   makeWrapper,
@@ -29,6 +31,8 @@ stdenv.mkDerivation rec {
   ];
 
   buildInputs = [
+    gsettings-desktop-schemas
+    gtk3
     webkitgtk_4_1
   ];
 
@@ -54,8 +58,6 @@ stdenv.mkDerivation rec {
 
     #### PlaydateSimulator
     cp $srcScript $out/bin/PlaydateSimulator
-    chmod +w $out/bin/PlaydateSimulator
-
     substituteInPlace $out/bin/PlaydateSimulator \
       --subst-var-by out "$out" \
       --subst-var-by version "${version}" \
@@ -63,8 +65,8 @@ stdenv.mkDerivation rec {
         lib.makeLibraryPath [
           curl
         ]
-      }"
-
+      }" \
+      --subst-var-by gsettingsSchemas "${gsettings-desktop-schemas}/share/gsettings-schemas/${gsettings-desktop-schemas.name}:${gtk3}/share/gsettings-schemas/${gtk3.name}"
     chmod +x $out/bin/PlaydateSimulator
 
     #### C API includes
