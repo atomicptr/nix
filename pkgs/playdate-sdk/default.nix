@@ -75,8 +75,8 @@ stdenv.mkDerivation rec {
     cp $out/share/playdate-sdk/C_API/pd_api.h $out/include/pd_api.h
 
     #### udev rules
-    mkdir -p $out/etc/udev/rules.d
-    cp $out/share/playdate-sdk/Resources/50-playdate.rules $out/etc/udev/rules.d/
+    mkdir -p $out/lib/udev/rules.d
+    cp $out/share/playdate-sdk/Resources/50-playdate.rules $out/lib/udev/rules.d/
 
     #### icons
     install -Dm644 $out/share/playdate-sdk/Resources/date.play.simulator.svg $out/share/icons/hicolor/scalable/apps/PlaydateSimulator.svg
