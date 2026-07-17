@@ -18,12 +18,19 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-yKEl3UpVY3lB9LxAsx0RotTsNHv8WS76ZqpzRi6BSZg=";
   };
 
+  srcScript = ./playdate-simulator-wrapper.sh;
+
+  strictDeps = true;
+  __structuredAttrs = true;
+
   nativeBuildInputs = [
     autoPatchelfHook
     makeWrapper
   ];
 
-  buildInputs = [ webkitgtk_4_1 ];
+  buildInputs = [
+    webkitgtk_4_1
+  ];
 
   dontConfigure = true;
   dontBuild = true;
@@ -33,18 +40,28 @@ stdenv.mkDerivation rec {
 
     mkdir -p $out/share/playdate-sdk
     cp -r * $out/share/playdate-sdk
+    mkdir -p $out/bin
 
     #### pdc
-    install -Dm755 $out/share/playdate-sdk/bin/pdc $out/bin/pdc
+    makeWrapper $out/share/playdate-sdk/bin/pdc $out/bin/pdc \
+      --run 'USER_SDK_DIR="''${XDG_DATA_HOME:-''$HOME/.local/share}/playdate-sdk-${version}"' \
+      --set PLAYDATE_SDK_PATH '$USER_SDK_DIR'
 
     #### pdutil
-    install -Dm755 $out/share/playdate-sdk/bin/pdutil $out/bin/pdutil
+    makeWrapper $out/share/playdate-sdk/bin/pdutil $out/bin/pdutil \
+      --run 'USER_SDK_DIR="''${XDG_DATA_HOME:-''$HOME/.local/share}/playdate-sdk-${version}"' \
+      --set PLAYDATE_SDK_PATH '$USER_SDK_DIR'
 
     #### PlaydateSimulator
-    # TODO: make simulator also work with auto patch elf instead of steam-run
-    makeWrapper ${steam-run}/bin/steam-run $out/bin/PlaydateSimulator \
-      --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath [ webkitgtk_4_1 ]} \
-      --append-flags $out/share/playdate-sdk/bin/PlaydateSimulator
+    cp $srcScript $out/bin/PlaydateSimulator
+    chmod +w $out/bin/PlaydateSimulator
+
+    substituteInPlace $out/bin/PlaydateSimulator \
+      --subst-var-by out "$out" \
+      --subst-var-by version "${version}" \
+      --subst-var-by steamRun "${steam-run}"
+
+    chmod +x $out/bin/PlaydateSimulator
 
     #### C API includes
     mkdir -p $out/include
@@ -57,6 +74,11 @@ stdenv.mkDerivation rec {
 
     #### icons
     install -Dm644 $out/share/playdate-sdk/Resources/date.play.simulator.svg $out/share/icons/hicolor/scalable/apps/PlaydateSimulator.svg
+
+    mkdir -p $out/share/applications
+    for item in "''${desktopItems[@]}"; do
+      ln -s "$item"/share/applications/* $out/share/applications/
+    done
 
     runHook postInstall
   '';
@@ -78,7 +100,7 @@ stdenv.mkDerivation rec {
   ];
 
   meta = {
-    description = "Official SDK and development tools for the Playdate handheld console, including Lua/C APIs, simulator, and Mirror capture utility.";
+    description = "Official SDK and development tools for the Playdate handheld console, including Lua/C APIs, simulator, and Mirror capture utility";
     homepage = "https://play.date";
     license = lib.licenses.unfree;
     maintainers = with lib.maintainers; [ atomicptr ];
