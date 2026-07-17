@@ -1,11 +1,11 @@
 {
   autoPatchelfHook,
+  curl,
   fetchurl,
   lib,
   makeDesktopItem,
   makeWrapper,
   stdenv,
-  steam-run,
   webkitgtk_4_1,
 }:
 
@@ -59,7 +59,11 @@ stdenv.mkDerivation rec {
     substituteInPlace $out/bin/PlaydateSimulator \
       --subst-var-by out "$out" \
       --subst-var-by version "${version}" \
-      --subst-var-by steamRun "${steam-run}"
+      --subst-var-by ldLibraryPath "${
+        lib.makeLibraryPath [
+          curl
+        ]
+      }"
 
     chmod +x $out/bin/PlaydateSimulator
 
@@ -76,9 +80,7 @@ stdenv.mkDerivation rec {
     install -Dm644 $out/share/playdate-sdk/Resources/date.play.simulator.svg $out/share/icons/hicolor/scalable/apps/PlaydateSimulator.svg
 
     mkdir -p $out/share/applications
-    for item in "''${desktopItems[@]}"; do
-      cp "$item"/share/applications/* $out/share/applications/
-    done
+    cp "''${desktopItems[0]}/share/applications/PlaydateSimulator.desktop" $out/share/applications/
 
     runHook postInstall
   '';
