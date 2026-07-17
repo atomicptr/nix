@@ -48,13 +48,11 @@ stdenv.mkDerivation rec {
 
     #### pdc
     makeWrapper $out/share/playdate-sdk/bin/pdc $out/bin/pdc \
-      --run 'USER_SDK_DIR="''${XDG_DATA_HOME:-''$HOME/.local/share}/playdate-sdk-${version}"' \
-      --set PLAYDATE_SDK_PATH '$USER_SDK_DIR'
+      --run 'export PLAYDATE_SDK_PATH="''${XDG_DATA_HOME:-''$HOME/.local/share}/playdate-sdk-${version}"'
 
     #### pdutil
     makeWrapper $out/share/playdate-sdk/bin/pdutil $out/bin/pdutil \
-      --run 'USER_SDK_DIR="''${XDG_DATA_HOME:-''$HOME/.local/share}/playdate-sdk-${version}"' \
-      --set PLAYDATE_SDK_PATH '$USER_SDK_DIR'
+      --run 'export PLAYDATE_SDK_PATH="''${XDG_DATA_HOME:-''$HOME/.local/share}/playdate-sdk-${version}"'
 
     #### PlaydateSimulator
     cp $srcScript $out/bin/PlaydateSimulator
