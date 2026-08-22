@@ -1,6 +1,7 @@
 {
   clang,
   clangStdenv,
+  copyDesktopItems,
   egl-wayland,
   fetchFromGitHub,
   freetype,
@@ -11,6 +12,7 @@
   libxext,
   libxi,
   libxinerama,
+  makeDesktopItem,
   makeWrapper,
   mesa,
   pkg-config,
@@ -27,10 +29,14 @@ clangStdenv.mkDerivation (finalAttrs: {
     hash = "sha256-lwSNKMXfdM9VJoUyxieIUEnvc0PxhdZTkB9WCOe0tfI=";
   };
 
+  __structuredAttrs = true;
+  strictDeps = true;
+
   nativeBuildInputs = [
     clang
     makeWrapper
     pkg-config
+    copyDesktopItems
   ];
 
   buildInputs = [
@@ -67,6 +73,9 @@ clangStdenv.mkDerivation (finalAttrs: {
     mkdir -p $out/bin
     cp build/raddbg $out/bin/
 
+    mkdir -p $out/share/icons/hicolor/256x256/apps
+    cp data/logo.png $out/share/icons/hicolor/256x256/apps/raddbg.png
+
     runHook postInstall
   '';
 
@@ -82,6 +91,23 @@ clangStdenv.mkDerivation (finalAttrs: {
         ]
       }"
   '';
+
+  desktopItems = [
+    (makeDesktopItem {
+      name = "raddbg";
+      desktopName = "RAD Debugger";
+      genericName = "Debugger";
+      comment = "A native, user-mode, multi-process, graphical debugger";
+      exec = "raddbg %U";
+      icon = "raddbg";
+      categories = [
+        "Development"
+        "Debugger"
+      ];
+      terminal = false;
+      startupNotify = true;
+    })
+  ];
 
   meta = with lib; {
     description = "A native, user-mode, multi-process, graphical debugger.";
