@@ -26,7 +26,7 @@ clangStdenv.mkDerivation (finalAttrs: {
     owner = "EpicGames";
     repo = "raddebugger";
     rev = "v${finalAttrs.version}";
-    hash = "sha256-lwSNKMXfdM9VJoUyxieIUEnvc0PxhdZTkB9WCOe0tfI=";
+    hash = "sha256-hTX52/x1RauIaYlpv/+pPYqh68Xi7TKE7bibGkFGy3I=";
   };
 
   __structuredAttrs = true;
