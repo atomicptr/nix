@@ -10,16 +10,16 @@
 
 buildNpmPackage rec {
   pname = "vscode-php-debug";
-  version = "1.40.1";
+  version = "1.40.2";
 
   src = fetchFromGitHub {
     owner = "xdebug";
     repo = "vscode-php-debug";
     rev = "v${version}";
-    hash = "sha256-ek9TJupjAwqmcaVIs18i9CSKXRZpMnpbOiS0wSnK+DQ=";
+    hash = "sha256-AKAPeQfK+GUF8xq74tbnJHrpPrLkLk2yfPb40sRQNwQ=";
   };
 
-  npmDepsHash = "sha256-MrS+fV5yOlEbRBmNirHKtKRyMfHPur5pzQavmBHeTqQ=";
+  npmDepsHash = "sha256-8ra+w9/xMpPdcp6OpvhofzzROr+N8w4nNQO7w5h/o5o=";
   npmBuildScript = "build";
 
   nativeBuildInputs = [
