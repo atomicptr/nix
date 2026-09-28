@@ -9,18 +9,18 @@
 let
   inherit (stdenvNoCC.hostPlatform) system;
   shaMap = {
-    x86_64-linux = "11bgiklcg58nlmrfcl0lfpip1r936jc9h0s6ybzc8nn7axyqmjzn";
-    x86_64-darwin = "0mx6izadzmc35mlm39m8y8fi6qlg9ln76k8hv620029h0ad0v3ka";
+    x86_64-linux = "1nmn0kd9xlrvkgqy14rr651cjn5rjjjqqhj7p3f4jqdxwvrrjdk4";
+    x86_64-darwin = "0xdvn0j1yjiy1wam4dx3vcpzf32n5l1601zmkwywn5a0fwv41mk0";
   };
 
   urlMap = {
-    x86_64-linux = "https://github.com/atomicptr/peon/releases/download/v0.2.0/peon_0.2.0_linux_amd64.tar.gz";
-    x86_64-darwin = "https://github.com/atomicptr/peon/releases/download/v0.2.0/peon_0.2.0_darwin_amd64.tar.gz";
+    x86_64-linux = "https://github.com/atomicptr/peon/releases/download/v0.3.0/peon_0.3.0_linux_amd64.tar.gz";
+    x86_64-darwin = "https://github.com/atomicptr/peon/releases/download/v0.3.0/peon_0.3.0_darwin_amd64.tar.gz";
   };
 in
 stdenvNoCC.mkDerivation {
   pname = "peon";
-  version = "0.2.0";
+  version = "0.3.0";
   src = fetchurl {
     url = urlMap.${system};
     sha256 = shaMap.${system};
