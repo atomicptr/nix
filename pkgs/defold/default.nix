@@ -43,7 +43,7 @@ let
 
     src = fetchurl {
       url = "https://github.com/defold/defold/releases/download/${version}/Defold-x86_64-linux.tar.gz";
-      hash = "sha256-7GAidYhUZ++Dv5QsabcX4gzExxIovR7s9cOqOk9HRDw=";
+      hash = "sha256-WZICFEozdiw5iff0T50xn+7aZeS/skgJOWYwJQOvCgw=";
     };
 
     dontBuild = true;
