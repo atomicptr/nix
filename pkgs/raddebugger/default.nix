@@ -20,13 +20,13 @@
 
 clangStdenv.mkDerivation (finalAttrs: {
   pname = "raddebugger";
-  version = "0.9.28-alpha";
+  version = "0.9.29-alpha";
 
   src = fetchFromGitHub {
     owner = "EpicGames";
     repo = "raddebugger";
     rev = "v${finalAttrs.version}";
-    hash = "sha256-hTX52/x1RauIaYlpv/+pPYqh68Xi7TKE7bibGkFGy3I=";
+    hash = "sha256-IQNicRWKdIamDeQU1RRceRR2QgoUlomQYoeCgepO10w=";
   };
 
   __structuredAttrs = true;
