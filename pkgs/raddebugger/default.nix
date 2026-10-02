@@ -2,20 +2,18 @@
   clang,
   clangStdenv,
   copyDesktopItems,
-  egl-wayland,
   fetchFromGitHub,
   freetype,
   lib,
   libGL,
+  libllvm,
   libx11,
-  libxcursor,
   libxext,
-  libxi,
-  libxinerama,
+  libxfixes,
   makeDesktopItem,
   makeWrapper,
-  mesa,
   pkg-config,
+  zenity,
 }:
 
 clangStdenv.mkDerivation (finalAttrs: {
@@ -34,21 +32,17 @@ clangStdenv.mkDerivation (finalAttrs: {
 
   nativeBuildInputs = [
     clang
+    copyDesktopItems
     makeWrapper
     pkg-config
-    copyDesktopItems
   ];
 
   buildInputs = [
-    egl-wayland
     freetype
     libGL
     libx11
-    libxcursor
     libxext
-    libxi
-    libxinerama
-    mesa
+    libxfixes
   ];
 
   postPatch = ''
@@ -84,10 +78,14 @@ clangStdenv.mkDerivation (finalAttrs: {
       --prefix LD_LIBRARY_PATH : "${
         lib.makeLibraryPath [
           libGL
-          mesa
-          egl-wayland
           libx11
           libxext
+        ]
+      }" \
+      --prefix PATH : "${
+        lib.makeBinPath [
+          libllvm
+          zenity
         ]
       }"
   '';
@@ -113,7 +111,7 @@ clangStdenv.mkDerivation (finalAttrs: {
     description = "A native, user-mode, multi-process, graphical debugger.";
     homepage = "https://github.com/EpicGames/raddebugger";
     license = licenses.mit;
-    platforms = platforms.linux;
+    platforms = [ "x86_64-linux" ];
     mainProgram = "raddbg";
     maintainers = with lib.maintainers; [ atomicptr ];
   };
