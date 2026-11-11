@@ -30,6 +30,7 @@
   openjdk25,
   pango,
   stdenv,
+  vulkan-loader,
   writeScript,
   zlib,
   uiScale ? "1.0",
@@ -123,9 +124,9 @@ buildFHSEnv {
     glib
     gobject-introspection
     gtk3
-    libgbm
     libGL
     libGLU
+    libgbm
     libx11
     libxcursor
     libxext
@@ -136,6 +137,7 @@ buildFHSEnv {
     libxxf86vm
     openal
     pango
+    vulkan-loader
     zlib
   ];
   runScript = "Defold";
